@@ -4,5 +4,12 @@
     "browser": true,
     "node": true
   },
-  "extends": "airbnb"
+  "extends": "airbnb",
+  "rules": {
+    "new-cap": 0,
+    "no-console": 0,
+    "no-param-reassign": 0,
+    "import/no-unresolved": 0,
+    "no-underscore-dangle": 0,
+  }
 }
