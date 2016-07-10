@@ -20,12 +20,6 @@ module.exports = {
     publicPath: '/',
     contentBase: 'example/'
   },
-  resolve: {
-    extensions: ['', '.js', '.jsx'],
-    alias: {
-      'react-shaky': path.resolve(__dirname, './src')
-    }
-  },
   module: {
     preLoaders: [
       {
@@ -39,13 +33,23 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         loaders: ['react-hot', 'babel']
-      }, {
-        test: /\.css$/, loader: 'style-loader!css-loader'
+      },
+      {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader'
       }
     ]
   },
+  resolve: {
+    extensions: ['', '.js'],
+    alias: {
+      'react-shaky': path.resolve(__dirname, './src/index.js')
+    },
+    root: __dirname
+  },
 
   plugins: [
+    new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.js'),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
   ]
