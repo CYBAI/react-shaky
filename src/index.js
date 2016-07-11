@@ -38,7 +38,7 @@ class ShakyCanvasComponent extends Component {
   }
 
   focusTextarea() {
-    this.refs.reactShakyTextarea.focus();
+    setTimeout(() => this.refs.reactShakyTextarea.focus(), 0);
   }
 
   handleUpdateDiagram(e) {
