@@ -1,4 +1,7 @@
+import './css/shaky.css';
+
 import React, { PropTypes, Component } from 'react'; // eslint-disable-line no-unused-vars
+import classNames from 'classnames';
 
 import Line from './ShakyCanvas/Line';
 import ShakyCanvas from './ShakyCanvas/ShakyCanvas';
@@ -11,9 +14,18 @@ class ShakyCanvasComponent extends Component {
   constructor() {
     super();
     this.shakyId = Date.now();
-    this.handleKeyUp = this.handleKeyUp.bind(this);
-    this.handleChange = this.handleChange.bind(this);
     this.handleDoubleClick = this.handleDoubleClick.bind(this);
+    this.handleUpdateDiagram = this.handleUpdateDiagram.bind(this);
+    this.state = {
+      editing: false,
+      shakyDiagram: '',
+      canvasWidth: 0,
+      canvasHeight: 0,
+    };
+  }
+
+  componentWillMount() {
+    this.setState({ shakyDiagram: this.props.children });
   }
 
   componentDidMount() {
@@ -21,30 +33,34 @@ class ShakyCanvasComponent extends Component {
   }
 
   handleDoubleClick() {
-    console.log('Double Clicked');
-    const textarea = (
-      <textarea
-        id={`shaky-textarea-${this.shakyId}`}
-        defaultValue={this.props.children}
-        onChange={this.handleChange}
-        onKeyUp={this.handleKeyUp}
-        cols="45"
-        rows="45"
-      ></textarea>
-    );
+    this.updateEditState();
+    this.focusTextarea();
   }
 
-  handleChange() {
+  focusTextarea() {
+    this.refs.reactShakyTextarea.focus();
+  }
+
+  handleUpdateDiagram(e) {
+    if (e.type === 'blur') {
+      this.updateEditState();
+    }
+
+    this.updateShakyDiagram(this.refs.reactShakyTextarea.value);
     this.drawDiagram();
   }
 
-  handleKeyUp() {
-    this.drawDiagram();
+  updateEditState() {
+    this.setState({ editing: !this.state.editing });
+  }
+
+  updateShakyDiagram(shakyDiagram) {
+    this.setState({ shakyDiagram });
   }
 
   // Draw a diagram from the ascii art contained in the #textarea.
   drawDiagram() {
-    const figures = parseASCIIArt(this.props.children);
+    const figures = parseASCIIArt(this.state.shakyDiagram);
 
     // Compute required canvas size.
     let width = 0;
@@ -63,6 +79,9 @@ class ShakyCanvasComponent extends Component {
     canvas.width = +width;
     canvas.height = +height;
 
+    this.setState({ canvasWidth: canvas.width });
+    this.setState({ canvasHeight: canvas.height });
+
     const shakyCtx = new ShakyCanvas(canvas);
     for (let i = 0; i < figuresLen; i++) {
       figures[i].draw(shakyCtx);
@@ -72,8 +91,33 @@ class ShakyCanvasComponent extends Component {
   render() {
     return (
       <div id="react-shaky-wrapper">
+        <textarea
+          id={`shaky-textarea-${this.shakyId}`}
+          className={
+            classNames({
+              'react-shaky-textarea-active': this.state.editing,
+              'react-shaky-textarea-hidden': !this.state.editing,
+            })
+          }
+          value={this.state.shakyDiagram}
+          onChange={this.handleUpdateDiagram}
+          onKeyUp={this.handleUpdateDiagram}
+          onBlur={this.handleUpdateDiagram}
+          ref="reactShakyTextarea"
+          style={{
+            width: this.state.canvasWidth,
+            height: this.state.canvasHeight,
+          }}
+        ></textarea>
         <canvas
           id={`shaky-canvas-${this.shakyId}`}
+          ref="reactShakyCanvas"
+          className={
+            classNames({
+              'react-shaky-canvas-active': !this.state.editing,
+              'react-shaky-canvas-hidden': this.state.editing,
+            })
+          }
           onDoubleClick={this.handleDoubleClick}
         ></canvas>
       </div>
@@ -82,7 +126,8 @@ class ShakyCanvasComponent extends Component {
 }
 
 ShakyCanvasComponent.propTypes = {
-  children: PropTypes.node,
+  children: PropTypes.node.isRequired,
+  editable: PropTypes.bool,
 };
 
 export default ShakyCanvasComponent;
