@@ -101,7 +101,6 @@ class ShakyCanvasComponent extends Component {
           }
           value={this.state.shakyDiagram}
           onChange={this.handleUpdateDiagram}
-          onKeyUp={this.handleUpdateDiagram}
           onBlur={this.handleUpdateDiagram}
           ref="reactShakyTextarea"
           style={{
