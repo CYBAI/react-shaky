@@ -46,7 +46,7 @@ class ShakyCanvasComponent extends Component {
       this.updateEditState();
     }
 
-    this.updateShakyDiagram(this.refs.reactShakyTextarea.value);
+    this.updateShakyDiagram(e.target.value);
     this.drawDiagram();
   }
 
