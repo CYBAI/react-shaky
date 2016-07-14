@@ -14,6 +14,7 @@ class ShakyCanvasComponent extends Component {
   constructor() {
     super();
     this.shakyId = Date.now();
+    this.handleEscape = this.handleEscape.bind(this);
     this.handleDoubleClick = this.handleDoubleClick.bind(this);
     this.handleUpdateDiagram = this.handleUpdateDiagram.bind(this);
     this.state = {
@@ -48,6 +49,12 @@ class ShakyCanvasComponent extends Component {
 
     this.updateShakyDiagram(e.target.value);
     this.drawDiagram();
+  }
+
+  handleEscape(e) {
+    if (e.keyCode === 27) {
+      this.reactShakyTextarea.blur();
+    }
   }
 
   updateEditState() {
@@ -101,6 +108,7 @@ class ShakyCanvasComponent extends Component {
           }
           value={this.state.shakyDiagram}
           onChange={this.handleUpdateDiagram}
+          onKeyUp={this.handleEscape}
           onBlur={this.handleUpdateDiagram}
           ref={(el) => (this.reactShakyTextarea = el)}
           style={{
