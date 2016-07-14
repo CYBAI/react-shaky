@@ -110,7 +110,6 @@ class ShakyCanvasComponent extends Component {
         ></textarea>
         <canvas
           id={`shaky-canvas-${this.shakyId}`}
-          ref="reactShakyCanvas"
           className={
             classNames({
               'react-shaky-canvas-active': !this.state.editing,
