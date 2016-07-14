@@ -38,7 +38,7 @@ class ShakyCanvasComponent extends Component {
   }
 
   focusTextarea() {
-    setTimeout(() => this.refs.reactShakyTextarea.focus(), 0);
+    setTimeout(() => this.reactShakyTextarea.focus(), 0);
   }
 
   handleUpdateDiagram(e) {
@@ -102,7 +102,7 @@ class ShakyCanvasComponent extends Component {
           value={this.state.shakyDiagram}
           onChange={this.handleUpdateDiagram}
           onBlur={this.handleUpdateDiagram}
-          ref="reactShakyTextarea"
+          ref={(el) => (this.reactShakyTextarea = el)}
           style={{
             width: this.state.canvasWidth,
             height: this.state.canvasHeight,
