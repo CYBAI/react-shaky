@@ -49,15 +49,18 @@ module.exports = {
     ]
   },
   output: {
-    filename: 'react-shaky.js',
+    filename: 'index.js',
     library: 'ReactShaky',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'lib'),
     umdNamedDefine: true
   },
   plugins: [
     new webpack.EnvironmentPlugin([
       'NODE_ENV'
-    ])
+    ]),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: { warnings: false }
+    })
   ],
   resolve: {
     extensions: [ '', '.js' ],
