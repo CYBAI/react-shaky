@@ -5,8 +5,10 @@
   "main": "lib/index.js",
   "scripts": {
     "dev": "node server.js --env=dev",
-    "build": "NODE_ENV=production webpack --config webpack.config.umd.js",
-    "prepublish": "npm run build"
+    "dist": "NODE_ENV=production webpack --config webpack.config.umd.js",
+    "compile": "./node_modules/babel-cli/bin/babel.js src --out-dir lib",
+    "cpCss": "cp src/shaky.css lib",
+    "prepublish": "npm run compile && npm run cpCss && npm run dist"
   },
   "author": "cybai <cyb.ai.815@gmail.com> (http://cybai.github.io/)",
   "license": "MIT",
@@ -35,7 +37,6 @@
     "webpack-dev-server": "^1.14.1"
   },
   "dependencies": {
-    "classnames": "^2.2.5",
     "react": "^15.2.1",
     "react-dom": "^15.2.1"
   }
