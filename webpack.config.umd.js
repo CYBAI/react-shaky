@@ -49,9 +49,9 @@ module.exports = {
     ]
   },
   output: {
-    filename: 'index.js',
+    filename: 'react-shaky.js',
     library: 'ReactShaky',
-    path: path.resolve(__dirname, 'lib'),
+    path: path.resolve(__dirname, 'dist'),
     umdNamedDefine: true
   },
   plugins: [
