@@ -1,7 +1,4 @@
-import './css/shaky.css';
-
 import React, { PropTypes, Component } from 'react'; // eslint-disable-line no-unused-vars
-import classNames from 'classnames';
 
 import Line from './ShakyCanvas/Line';
 import ShakyCanvas from './ShakyCanvas/ShakyCanvas';
@@ -100,30 +97,22 @@ class ShakyCanvasComponent extends Component {
       <div id="react-shaky-wrapper">
         <textarea
           id={`shaky-textarea-${this.shakyId}`}
-          className={
-            classNames({
-              'react-shaky-textarea-active': this.state.editing,
-              'react-shaky-textarea-hidden': !this.state.editing,
-            })
-          }
           value={this.state.shakyDiagram}
           onChange={this.handleUpdateDiagram}
           onKeyUp={this.handleEscape}
           onBlur={this.handleUpdateDiagram}
           ref={(el) => (this.reactShakyTextarea = el)}
           style={{
+            display: this.state.editing ? 'block' : 'none',
             width: this.state.canvasWidth,
             height: this.state.canvasHeight,
           }}
         ></textarea>
         <canvas
           id={`shaky-canvas-${this.shakyId}`}
-          className={
-            classNames({
-              'react-shaky-canvas-active': !this.state.editing,
-              'react-shaky-canvas-hidden': this.state.editing,
-            })
-          }
+          style={{
+            display: this.state.editing ? 'none' : 'block',
+          }}
           onDoubleClick={this.handleDoubleClick}
         ></canvas>
       </div>
