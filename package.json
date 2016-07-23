@@ -5,8 +5,8 @@
   "main": "lib/index.js",
   "scripts": {
     "dev": "node server.js --env=dev",
-    "build": "NODE_ENV=dev webpack --progress --profile",
-    "compile": "./node_modules/babel-cli/bin/babel.js src --out-dir lib"
+    "build": "NODE_ENV=production webpack --config webpack.config.umd.js",
+    "prepublish": "npm run build"
   },
   "author": "cybai <cyb.ai.815@gmail.com> (http://cybai.github.io/)",
   "license": "MIT",
@@ -36,7 +36,6 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
-    "eslint": "^3.0.1",
     "react": "^15.2.1",
     "react-dom": "^15.2.1"
   }
