@@ -1,6 +1,6 @@
 {
   "name": "react-shaky",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Shaky diagram component",
   "main": "lib/index.js",
   "scripts": {
@@ -11,6 +11,11 @@
     "prepublish": "npm run compile && npm run cpCss && npm run dist"
   },
   "author": "cybai <cyb.ai.815@gmail.com> (http://cybai.github.io/)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CYBAI/react-shaky.git"
+  },
+  "bugs": "https://github.com/CYBAI/react-shaky/issues",
   "license": "MIT",
   "devDependencies": {
     "babel": "^6.5.2",
@@ -39,5 +44,9 @@
   "dependencies": {
     "react": "^15.2.1",
     "react-dom": "^15.2.1"
-  }
+  },
+  "keywords": [
+    "react",
+    "shaky"
+  ]
 }
