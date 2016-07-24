@@ -1,5 +1,8 @@
 # React Shaky Diagram
 
+[![Build Status](https://travis-ci.org/CYBAI/react-shaky.svg?branch=master)](https://travis-ci.org/CYBAI/react-shaky)
+[![npm version](https://badge.fury.io/js/react-shaky.svg)](https://badge.fury.io/js/react-shaky)
+
 Use this component to draw a shaky diagram.
 Code of drawing shaky diagram is ported from [`moe-js`](https://github.com/mraleph/moe-js/blob/master/talks/jsconfeu2012/tools/shaky/web/shaky.dart) and [`shaky.coffee`](https://github.com/dbushong/shaky/blob/master/shaky.coffee).
 
