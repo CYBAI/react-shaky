@@ -80,15 +80,19 @@ class ShakyCanvasComponent extends Component {
 
     const canvas = document.getElementById(`shaky-canvas-${this.shakyId}`);
 
-    canvas.width = +width;
-    canvas.height = +height;
+    if (canvas) {
+      canvas.width = +width;
+      canvas.height = +height;
 
-    this.setState({ canvasWidth: canvas.width });
-    this.setState({ canvasHeight: canvas.height });
+      this.setState({ canvasWidth: canvas.width });
+      this.setState({ canvasHeight: canvas.height });
 
-    const shakyCtx = new ShakyCanvas(canvas);
-    for (let i = 0; i < figuresLen; i++) {
-      figures[i].draw(shakyCtx);
+      const shakyCtx = new ShakyCanvas(canvas);
+      for (let i = 0; i < figuresLen; i++) {
+        figures[i].draw(shakyCtx);
+      }
+    } else {
+      console.warn('Your shaky canvas has not mounted yet.');
     }
   }
 
